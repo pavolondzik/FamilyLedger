@@ -3,61 +3,14 @@ import type {
   Project,
   UpdateProjectDTO,
 } from '@/features/projects/types/project';
+import { seedProjects } from '@/data/seeds';
+import {
+  readFromStorage,
+  writeToStorage,
+  resetStorageForKey,
+} from '@/data/seedInitializer';
 
 export const PROJECTS_STORAGE_KEY = 'family-ledger.projects';
-
-const memoryStorage = new Map<string, string>();
-
-const seedProjects: Project[] = [
-  {
-    id: 'project-kitchen-remodel',
-    userId: 'current-user',
-    name: 'Kitchen Remodel',
-    description: 'Track budget, contractor milestones, and appliance delivery dates.',
-    createdAt: '2026-03-12T10:00:00.000Z',
-    updatedAt: '2026-03-17T14:00:00.000Z',
-  },
-  {
-    id: 'project-summer-trip',
-    userId: 'current-user',
-    name: 'Summer Trip',
-    description: 'Plan bookings, spending caps, and packing checklist tasks.',
-    createdAt: '2026-03-10T09:30:00.000Z',
-    updatedAt: '2026-03-16T18:15:00.000Z',
-  },
-];
-
-const cloneProjects = (projects: Project[]) => {
-  return projects.map((project) => ({ ...project }));
-};
-
-const isStorageAvailable = () => {
-  return (
-    typeof window !== 'undefined' &&
-    typeof window.localStorage !== 'undefined' &&
-    typeof window.localStorage.getItem === 'function' &&
-    typeof window.localStorage.setItem === 'function' &&
-    typeof window.localStorage.removeItem === 'function'
-  );
-};
-
-const getStorage = () => {
-  if (isStorageAvailable()) {
-    return window.localStorage;
-  }
-
-  return {
-    getItem: (key: string) => {
-      return memoryStorage.get(key) ?? null;
-    },
-    setItem: (key: string, value: string) => {
-      memoryStorage.set(key, value);
-    },
-    removeItem: (key: string) => {
-      memoryStorage.delete(key);
-    },
-  };
-};
 
 const sortProjects = (projects: Project[]) => {
   return [...projects].sort((left, right) => {
@@ -66,24 +19,11 @@ const sortProjects = (projects: Project[]) => {
 };
 
 const readProjectsFromStorage = (): Project[] => {
-  const storage = getStorage();
-  const storedProjects = storage.getItem(PROJECTS_STORAGE_KEY);
-
-  if (!storedProjects) {
-    const seededProjects = sortProjects(seedProjects);
-    storage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(seededProjects));
-    return cloneProjects(seededProjects);
-  }
-
-  const parsedProjects = JSON.parse(storedProjects) as Project[];
-  return sortProjects(parsedProjects);
+  return readFromStorage(PROJECTS_STORAGE_KEY, seedProjects, sortProjects);
 };
 
 const writeProjectsToStorage = (projects: Project[]) => {
-  const storage = getStorage();
-  const nextProjects = sortProjects(projects);
-  storage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(nextProjects));
-  return nextProjects;
+  return writeToStorage(PROJECTS_STORAGE_KEY, projects, sortProjects);
 };
 
 const buildProjectPayload = (data: CreateProjectDTO | UpdateProjectDTO) => {
@@ -173,9 +113,5 @@ export const deleteProject = async (projectId: string): Promise<string> => {
 };
 
 export const resetProjectsStorage = () => {
-  memoryStorage.delete(PROJECTS_STORAGE_KEY);
-
-  if (isStorageAvailable()) {
-    window.localStorage.removeItem(PROJECTS_STORAGE_KEY);
-  }
+  resetStorageForKey(PROJECTS_STORAGE_KEY);
 };
