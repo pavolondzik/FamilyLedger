@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11626.173 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -17,6 +17,36 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{9048EB7F-3875-A59E-E36B-5BD4C6F2A282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyLedger.Infrastructure", "src\infrastructure\FamilyLedger.Infrastructure\FamilyLedger.Infrastructure.csproj", "{DE2DEBF2-E9B6-643A-32BE-091620E84430}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A6E3145D-EE44-4DC0-AE49-D93EF8267B43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{3EFD38D3-2EBD-4592-9CC0-4D9FDBCCE327}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\Create-FolderStructure.ps1 = scripts\Create-FolderStructure.ps1
+		scripts\install-powershell.bash = scripts\install-powershell.bash
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5A97FCF-E4E3-447D-9A93-194673FA9FAB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{12B4102E-FDDC-4C9F-9C1B-1B40AC2DD736}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{8ADC2177-5FCA-441A-8F65-3A181349AA47}"
+	ProjectSection(SolutionItems) = preProject
+		Design\Family_Ledger_Statistics.png = Design\Family_Ledger_Statistics.png
+		Design\UserManagement.png = Design\UserManagement.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{C1C945EF-7753-4F73-99C4-958465F44525}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{B16A195C-5E0B-4865-B95D-46CD467C3317}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\deploy-frontend.yml = .github\workflows\deploy-frontend.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +82,8 @@ Global
 		{E2298767-5085-5F43-5E65-D9A437AD4026} = {8D626EA8-CB54-BC41-363A-217881BEBA6E}
 		{9048EB7F-3875-A59E-E36B-5BD4C6F2A282} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{DE2DEBF2-E9B6-643A-32BE-091620E84430} = {9048EB7F-3875-A59E-E36B-5BD4C6F2A282}
+		{12B4102E-FDDC-4C9F-9C1B-1B40AC2DD736} = {A6E3145D-EE44-4DC0-AE49-D93EF8267B43}
+		{B16A195C-5E0B-4865-B95D-46CD467C3317} = {C1C945EF-7753-4F73-99C4-958465F44525}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE3D8E77-24BA-4483-84CE-903B8E058C6D}
